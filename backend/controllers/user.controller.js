@@ -8,7 +8,7 @@ export const getRecommendedUsers = async (req,res)=>{
             const recommendedUsers = await User.find({
                 $and:[
                     {_id: {$ne: currentUserId}},
-                    {$id: {$nin: currentUser.friends}},
+                    {_id: {$nin: currentUser.friends}},
                     {isOnboarded:true}
                 ]
             })
@@ -126,6 +126,7 @@ export const getFriendRequests = async (req,res) =>{
 
 export const getOutgoingFriendReqs = async (req,res)=>{
   try {
+    console.log("req.user => ", req.user);
     const outgoingRequests = await FriendRequest.find({
         sender:req.user.id,
         status: "pending",}).

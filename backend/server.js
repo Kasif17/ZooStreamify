@@ -23,11 +23,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/chat", chatRoutes);
 
 
-app.get("/", (req, res) => {
-  console.log("✅ Test route hit!");
-  res.send("✅ Server is running");
-});
-
 const startServer = async () => {
   try {
     await mongoDB(); // ✅ Connect DB once here

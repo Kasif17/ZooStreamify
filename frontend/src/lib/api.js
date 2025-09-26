@@ -29,3 +29,27 @@ export const completeOnboarding = async (userData)=>{
   const response = await axiosInstance.post("/auth/onboarding",userData)
   return response.data
 }
+
+export const getUserFriends = async ()=>{
+   const response = await axiosInstance.get("/users/friends");
+   return response.data;
+}
+
+export const getRecommendedUsers =  async()=>{
+  const response = await axiosInstance.get("/users");
+   return response.data
+}
+
+export const getOngoingFriendsReqs =  async()=>{
+  const response = await axiosInstance.get("/users/outgoing-friend-requests");
+   return response.data
+}
+export const sendFriendRequest = async (userId) => {
+  try {
+    const response = await axiosInstance.post(`/users/friend-request/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error sending friend request:", error.response?.data || error.message);
+    throw error;
+  }
+};
