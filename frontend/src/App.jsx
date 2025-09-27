@@ -12,6 +12,7 @@ import PageLoader from './components/PageLoader'
 import useAuthUser from './hooks/useAuthUser'
 import Layout from './components/Layout'
 import { useThemeStore } from './store/useThemeStore'
+import FriendsPage from './pages/FriendsPage'
 
 const App = () => {
   //tanstack query 
@@ -56,6 +57,19 @@ const App = () => {
        )}/>
        
        <Route path='/onboarding' element={isAuthenticated ? (!isOnboarded ? (<OnboardingPage/>) : (<Navigate to="/"/>)):(<Navigate to='/login'/>)}/>
+
+        <Route
+          path="/friends"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout showSidebar={true}>
+                <FriendsPage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? '/login' : '/onboarding'} />
+            )
+          }
+        />
       </Routes>
       <Toaster/>
     </div>
